@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h3>Enter a matrix of 4 rows and 2 columns from the user display it in matrix format</h3>
+<pre><code>
+    #include <stdio.h>
+
+        int main() {
+            int matrix[4][2];
+            int i, j;
+        
+            printf("Enter the elements of the matrix:\n");
+        
+            for (i = 0; i < 4; i++) {
+                for (j = 0; j < 2; j++) {
+                    scanf("%d", &matrix[i][j]);
+                }
+            }
+        
+            printf("\nHere is the matrix you entered in matrix format:\n");
+        
+            for (i = 0; i < 4; i++) {
+                for (j = 0; j < 2; j++) {
+                    printf("%d ", matrix[i][j]);
+                }
+                printf("\n");
+            }
+        
+            return 0;
+        }        
+</code></pre>
+<img src="../2D ARRAYS/output/Q1.jpg">
+</body>
+</html>

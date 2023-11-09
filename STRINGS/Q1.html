@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h3>Enter The STRING from user and convert in Uppercase</h3>
+<pre><code>
+    #include <stdio.h>
+
+        int main() {
+            char inputString[100];
+        
+            printf("Enter a string: ");
+            fgets(inputString, sizeof(inputString), stdin);
+        
+            // Convert each character to uppercase
+            int i = 0;
+            while (inputString[i] != '\0') {
+                if (inputString[i] >= 'a' && inputString[i] <= 'z') {
+                    inputString[i] = inputString[i] - 32; // converting lowercase to uppercase in ASCII
+                }
+                i++;
+            }
+        
+            printf("Uppercase string: %s", inputString);
+        
+            return 0;
+        }
+        
+</code></pre>
+<img src="/questions/STRINGS/Q1.html">
+</body>
+</html>

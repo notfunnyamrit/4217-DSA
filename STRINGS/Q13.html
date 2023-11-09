@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h3>ENTER THE STRING FROM THE USER AND COPY REVERSE OF THE STRING INTO ANOTHER STRING</h3>
+<pre><code>
+    #include <stdio.h>
+        #include <string.h>
+        
+        int main() {
+            char originalString[1000];
+            char reversedString[1000];
+        
+            printf("Enter a string: ");
+            fgets(originalString, sizeof(originalString), stdin);
+        
+            int length = strlen(originalString) - 1; // Exclude newline character
+        
+            for (int i = 0; i < length; i++) {
+                reversedString[i] = originalString[length - 1 - i];
+            }
+            reversedString[length] = '\0'; // Add the null terminator at the end of the reversed string
+        
+            printf("Original String: %s\n", originalString);
+            printf("Reversed String: %s\n", reversedString);
+        
+            return 0;
+        }
+                
+</code></pre>
+<img src="../STRINGS/output/Q13.jpg">
+</body>
+</html>

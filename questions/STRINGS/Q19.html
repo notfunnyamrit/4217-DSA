@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h3>ENTER THE STRING FROM THE USER AND CONVERT INTO A FLOAT VALUE</h3>
+<pre><code>
+    #include <stdio.h>
+        #include <stdlib.h>
+        
+        int main() {
+            char inputString[100];
+            float floatValue;
+        
+            printf("Enter a string: ");
+            fgets(inputString, sizeof(inputString), stdin);
+        
+            // Converting string to a float
+            floatValue = atof(inputString);
+        
+            printf("The float value is: %f\n", floatValue);
+        
+            return 0;
+        }
+                
+</code></pre>
+<img src="../STRINGS/output/Q19.jpg">
+</body>
+</html>

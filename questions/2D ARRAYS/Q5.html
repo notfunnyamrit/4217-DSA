@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h3>Enter a Matrix from user, copy it in another matrix of same size</h3>
+<pre><code>
+    #include <stdio.h>
+
+        int main() {
+            int row, col;
+        
+            // Input for the number of rows and columns for the matrix
+            printf("Enter the number of rows: ");
+            scanf("%d", &row);
+            printf("Enter the number of columns: ");
+            scanf("%d", &col);
+        
+            // Initialize the original matrix and the copy matrix
+            int originalMatrix[row][col], copyMatrix[row][col];
+        
+            // Input for the elements of the original matrix
+            printf("Enter the elements of the matrix:\n");
+            for (int i = 0; i < row; i++) {
+                for (int j = 0; j < col; j++) {
+                    scanf("%d", &originalMatrix[i][j]);
+                }
+            }
+        
+            // Copy the elements from the original matrix to the copy matrix
+            for (int i = 0; i < row; i++) {
+                for (int j = 0; j < col; j++) {
+                    copyMatrix[i][j] = originalMatrix[i][j];
+                }
+            }
+        
+            // Display the copy matrix
+            printf("The copy of the original matrix is:\n");
+            for (int i = 0; i < row; i++) {
+                for (int j = 0; j < col; j++) {
+                    printf("%d\t", copyMatrix[i][j]);
+                }
+                printf("\n");
+            }
+        
+            return 0;
+        }
+        
+        
+</code></pre>
+<img src="../2D ARRAYS/output/Q5.jpg">
+</body>
+</html>

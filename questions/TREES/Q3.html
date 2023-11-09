@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h3>PRINT LEFT VIEW OF BINARY TREE</h3>
+<pre><code>
+    #include <stdio.h>
+        #include <stdlib.h>
+        
+        struct Node {
+            char data;
+            struct Node* left;
+            struct Node* right;
+        };
+        
+        int search(char arr[], int start, int end, char value) {
+            for (int i = start; i <= end; i++) {
+                if (arr[i] == value) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+        
+        struct Node* buildTree(char preorder[], char inorder[], int inStart, int inEnd, int preIndex) {
+            if (inStart > inEnd) {
+                return NULL;
+            }
+        
+            struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+            newNode->data = preorder[preIndex];
+            newNode->left = newNode->right = NULL;
+        
+            if (inStart == inEnd) {
+                return newNode;
+            }
+        
+            int inIndex = search(inorder, inStart, inEnd, newNode->data);
+        
+            newNode->left = buildTree(preorder, inorder, inStart, inIndex - 1, preIndex + 1);
+            newNode->right = buildTree(preorder, inorder, inIndex + 1, inEnd, preIndex + inIndex - inStart + 1);
+        
+            return newNode;
+        }
+        
+        void leftViewUtil(struct Node* root, int level, int* max_level) {
+            if (root == NULL) {
+                return;
+            }
+        
+            if (*max_level < level) {
+                printf("%c ", root->data);
+                *max_level = level;
+            }
+        
+            leftViewUtil(root->left, level + 1, max_level);
+            leftViewUtil(root->right, level + 1, max_level);
+        }
+        
+        void leftView(struct Node* root) {
+            int max_level = 0;
+            leftViewUtil(root, 1, &max_level);
+        }
+        
+        int main() {
+            int size;
+            printf("Enter the number of nodes: ");
+            scanf("%d", &size);
+        
+            char preorder[size], inorder[size];
+        
+            printf("Enter the preorder traversal: ");
+            for (int i = 0; i < size; i++) {
+                scanf(" %c", &preorder[i]);
+            }
+        
+            printf("Enter the inorder traversal: ");
+            for (int i = 0; i < size; i++) {
+                scanf(" %c", &inorder[i]);
+            }
+        
+            struct Node* root = buildTree(preorder, inorder, 0, size - 1, 0);
+        
+            printf("Left view of the binary tree: ");
+            leftView(root);
+            printf("\n");
+        
+            return 0;
+        }
+                
+</code></pre>
+<img src="../TREES/output/Q3.jpg">
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h3>ENTER A STRING ARRAY FROM THE USER AND PERFORM MERGE SORT ALGORITHM THROUGH ITERATION. ALSO CALCULATE THE WORST AND BEST COMPLEXITY WITH EXACT TIME</h3>
+<pre><code>
+    #include <stdio.h>
+        #include <string.h>
+        #include <time.h>
+        
+        // Function to merge two subarrays into one array
+        void merge(char arr[][100], int left, int mid, int right) {
+            int i, j, k;
+            int n1 = mid - left + 1;
+            int n2 = right - mid;
+        
+            char L[n1][100], R[n2][100];
+        
+            for (i = 0; i < n1; i++)
+                strcpy(L[i], arr[left + i]);
+            for (j = 0; j < n2; j++)
+                strcpy(R[j], arr[mid + 1 + j]);
+        
+            i = 0;
+            j = 0;
+            k = left;
+        
+            while (i < n1 && j < n2) {
+                if (strcmp(L[i], R[j]) <= 0) {
+                    strcpy(arr[k], L[i]);
+                    i++;
+                } else {
+                    strcpy(arr[k], R[j]);
+                    j++;
+                }
+                k++;
+            }
+        
+            while (i < n1) {
+                strcpy(arr[k], L[i]);
+                i++;
+                k++;
+            }
+        
+            while (j < n2) {
+                strcpy(arr[k], R[j]);
+                j++;
+                k++;
+            }
+        }
+        
+        // Iterative function to perform Merge Sort on a string array
+        void iterativeMergeSort(char arr[][100], int size) {
+            int curr_size;
+            int left_start;
+        
+            for (curr_size = 1; curr_size <= size - 1; curr_size = 2 * curr_size) {
+                for (left_start = 0; left_start < size - 1; left_start += 2 * curr_size) {
+                    int mid = left_start + curr_size - 1;
+                    int right_end = left_start + 2 * curr_size - 1;
+        
+                    if (right_end >= size) {
+                        right_end = size - 1;
+                    }
+        
+                    merge(arr, left_start, mid, right_end);
+                }
+            }
+        }
+        
+        int main() {
+            int size;
+        
+            printf("Enter the number of strings in the array: ");
+            scanf("%d", &size);
+        
+            char arr[size][100];
+        
+            printf("Enter %d strings:\n", size);
+            for (int i = 0; i < size; i++) {
+                scanf("%s", arr[i]);
+            }
+        
+            // Calculate the time for worst case
+            clock_t start = clock();
+            iterativeMergeSort(arr, size);
+            clock_t end = clock();
+            double cpu_time_used_worst = ((double)(end - start)) / CLOCKS_PER_SEC;
+        
+            // Best case: Already sorted array
+            // To simulate the best case, copy the array to another array and sort
+            char arr_best[size][100];
+            for (int i = 0; i < size; i++) {
+                strcpy(arr_best[i], arr[i]);
+            }
+        
+            start = clock();
+            iterativeMergeSort(arr_best, size);
+            end = clock();
+            double cpu_time_used_best = ((double)(end - start)) / CLOCKS_PER_SEC;
+        
+            printf("\nSorted Array: ");
+            for (int i = 0; i < size; i++) {
+                printf("%s ", arr[i]);
+            }
+            printf("\n");
+        
+            printf("Time taken for worst case: %f seconds\n", cpu_time_used_worst);
+            printf("Time taken for best case: %f seconds\n", cpu_time_used_best);
+        
+            return 0;
+        }
+                
+</code></pre>
+<img src="../SORTING ALGORITHMS/output/Q!7.jpg">
+</body>
+</html>

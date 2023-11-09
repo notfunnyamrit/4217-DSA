@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h3>ENTER THE STRING FROM USER, ENTER THE INDEX NUMBER AND PRINT CHARACTER PRESENT ON THAT INDEX</h3>
+<pre><code>
+    #include <stdio.h>
+
+        int main() {
+            char inputString[1000];
+            int index;
+        
+            printf("Enter a string: ");
+            fgets(inputString, sizeof(inputString), stdin);
+        
+            printf("Enter the index number: ");
+            scanf("%d", &index);
+        
+            if (index >= 0 && index < strlen(inputString)) {
+                printf("Character at index %d is: %c\n", index, inputString[index]);
+            } else {
+                printf("Index out of range for the given string.\n");
+            }
+        
+            return 0;
+        }
+        
+        
+</code></pre>
+<img src="../STRINGS/output/Q10.jpg">
+</body>
+</html>

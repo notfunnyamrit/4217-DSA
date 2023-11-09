@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h3>-</h3>
+<pre><code>
+    #include <stdio.h>
+
+        int main() {
+            int row, col;
+            int scalar;
+        
+            // Input for the number of rows and columns for the matrix
+            printf("Enter the number of rows: ");
+            scanf("%d", &row);
+            printf("Enter the number of columns: ");
+            scanf("%d", &col);
+        
+            // Input for the scalar value
+            printf("Enter the scalar value: ");
+            scanf("%d", &scalar);
+        
+            // Initialize the matrix
+            int matrix[row][col];
+        
+            // Input for the elements of the matrix
+            printf("Enter the elements of the matrix:\n");
+            for (int i = 0; i < row; i++) {
+                for (int j = 0; j < col; j++) {
+                    scanf("%d", &matrix[i][j]);
+                }
+            }
+        
+            // Perform scalar multiplication
+            for (int i = 0; i < row; i++) {
+                for (int j = 0; j < col; j++) {
+                    matrix[i][j] *= scalar;
+                }
+            }
+        
+            // Display the result matrix
+            printf("The result of scalar multiplication is:\n");
+            for (int i = 0; i < row; i++) {
+                for (int j = 0; j < col; j++) {
+                    printf("%d\t", matrix[i][j]);
+                }
+                printf("\n");
+            }
+        
+            return 0;
+        }
+        
+        
+</code></pre>
+<img src="../2D ARRAYS/output/Q6.jpg">
+</body>
+</html>

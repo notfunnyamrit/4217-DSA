@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h3></h3>
+<pre><code>
+    #include <stdio.h>
+
+        // Function to calculate Fibonacci using recursion
+        int fibonacci(int n) {
+            if (n <= 1) {
+                return n;
+            } else {
+                return fibonacci(n - 1) + fibonacci(n - 2);
+            }
+        }
+        
+        int main() {
+            int number;
+            printf("Enter a number to calculate its Fibonacci: ");
+            scanf("%d", &number);
+        
+            printf("Fibonacci of %d = %d\n", number, fibonacci(number));
+        
+            return 0;
+        }
+                
+</code></pre>
+<img src="../RECURSION/output/Q2.jpg">
+</body>
+</html>

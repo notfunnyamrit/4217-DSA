@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h3>CALCULATE THE SUM OF NATURAL NUMBERS TILL 10 USING RECURSION</h3>
+<pre><code>
+    #include <stdio.h>
+
+        int sumOfNaturalNumbers(int n) {
+            if (n == 0) {
+                return 0;
+            } else {
+                return n + sumOfNaturalNumbers(n - 1);
+            }
+        }
+        
+        int main() {
+            int n = 10;
+            int sum = sumOfNaturalNumbers(n);
+            printf("The sum of natural numbers up to %d is: %d\n", n, sum);
+            return 0;
+        }
+                
+</code></pre>
+<img src="../RECURSION/output/Q3.jpg">
+</body>
+</html>

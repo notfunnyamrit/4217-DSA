@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h3>CALCULATE THE BEST AND WORST COMPLEXITY OF THE BINARY SEARCHING ALGORITHM WITH EXACT TIME TAKEN BY THE ALGORITHM ON INTEGER ARRAY</h3>
+<pre><code>
+    #include <stdio.h>
+        #include <time.h>
+        
+        // Binary search function
+        int binarySearch(int arr[], int size, int target) {
+            int left = 0;
+            int right = size - 1;
+        
+            while (left <= right) {
+                int mid = left + (right - left) / 2;
+        
+                if (arr[mid] == target) {
+                    return mid; // Element found at index mid
+                } else if (arr[mid] < target) {
+                    left = mid + 1; // Update left boundary
+                } else {
+                    right = mid - 1; // Update right boundary
+                }
+            }
+        
+            return -1; // Element not found
+        }
+        
+        int main() {
+            int size = 100000; // Adjust the array size as needed
+            int arr[size];
+        
+            // Generating a sorted array of integers
+            for (int i = 0; i < size; i++) {
+                arr[i] = i; // Filling the array with sorted integers
+            }
+        
+            int bestCaseElement = size / 2; // Best case: Element at the middle of the array
+            int worstCaseElement = size + 1; // Element not present in the array
+        
+            clock_t start, end;
+            double cpu_time_used;
+        
+            // BEST CASE: Element at the middle of the array
+            start = clock();
+            int bestCaseResult = binarySearch(arr, size, bestCaseElement);
+            end = clock();
+        
+            cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+        
+            if (bestCaseResult != -1) {
+                printf("Best Case: Element %d found at index: %d\n", bestCaseElement, bestCaseResult);
+            } else {
+                printf("Best Case: Element %d not found in the array.\n", bestCaseElement);
+            }
+        
+            printf("Best Case Time taken: %f seconds\n\n", cpu_time_used);
+        
+            // WORST CASE: Element not present in the array
+            start = clock();
+            int worstCaseResult = binarySearch(arr, size, worstCaseElement);
+            end = clock();
+        
+            cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+        
+            if (worstCaseResult != -1) {
+                printf("Worst Case: Element %d found at index: %d\n", worstCaseElement, worstCaseResult);
+            } else {
+                printf("Worst Case: Element %d not found in the array.\n", worstCaseElement);
+            }
+        
+            printf("Worst Case Time taken: %f seconds\n", cpu_time_used);
+        
+            return 0;
+        }
+        
+        
+</code></pre>
+<img src="../SEARCHING ALGORITHMS/output/Q10.jpg">
+</body>
+</html>

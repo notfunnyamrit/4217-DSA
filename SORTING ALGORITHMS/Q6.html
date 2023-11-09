@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h3>ENTER A INTEGER ARRAY FROM THE USER AND PERFORM INSERTION SORT ALGORITHM THROUGH RECURSION. ALSO CALCULATE THE WORST AND BEST COMPLEXITY WITH EXACT TIME</h3>
+<pre><code>
+    #include <stdio.h>
+        #include <time.h>
+        
+        // Function to perform insertion sort using recursion
+        void recursiveInsertionSort(int arr[], int n) {
+            if (n <= 1) {
+                return;
+            }
+        
+            recursiveInsertionSort(arr, n - 1);
+        
+            int lastElement = arr[n - 1];
+            int j = n - 2;
+        
+            while (j >= 0 && arr[j] > lastElement) {
+                arr[j + 1] = arr[j];
+                j--;
+            }
+        
+            arr[j + 1] = lastElement;
+        }
+        
+        int main() {
+            int size;
+        
+            printf("Enter the size of the array: ");
+            scanf("%d", &size);
+        
+            int arr[size];
+        
+            printf("Enter %d elements:\n", size);
+            for (int i = 0; i < size; i++) {
+                scanf("%d", &arr[i]);
+            }
+        
+            // Calculate the time for worst case (i.e., array is reverse sorted)
+            clock_t start = clock();
+            recursiveInsertionSort(arr, size);
+            clock_t end = clock();
+            double cpu_time_used_worst = ((double)(end - start)) / CLOCKS_PER_SEC;
+        
+            // Calculate the time for best case (i.e., array is already sorted)
+            start = clock();
+            recursiveInsertionSort(arr, size);
+            end = clock();
+            double cpu_time_used_best = ((double)(end - start)) / CLOCKS_PER_SEC;
+        
+            printf("\nSorted Array: ");
+            for (int i = 0; i < size; i++) {
+                printf("%d ", arr[i]);
+            }
+            printf("\n");
+        
+            printf("Time taken for worst case: %f seconds\n", cpu_time_used_worst);
+            printf("Time taken for best case: %f seconds\n", cpu_time_used_best);
+        
+            return 0;
+        }
+                
+</code></pre>
+<img src="../SORTING ALGORITHMS/output/Q6.jpg">
+</body>
+</html>

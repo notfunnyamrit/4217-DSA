@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h3>ENTER A STRING FROM THE USER, ENTER A CHARACTER AND PERFORM LINEAR SEARCH ALGORITHM THROUGH ITERATION</h3>
+<pre><code>
+    #include <stdio.h>
+
+        int main() {
+            char str[100];
+            char target;
+            int found = 0;
+        
+            // Input the string
+            printf("Enter a string: ");
+            scanf("%s", str);
+        
+            // Input the character to search for
+            printf("Enter a character to search for: ");
+            scanf(" %c", &target); // Note the space before %c to skip leading whitespace
+        
+            for (int i = 0; str[i] != '\0'; i++) {
+                if (str[i] == target) {
+                    printf("Character '%c' found at index %d.\n", target, i);
+                    found = 1;
+                    break;
+                }
+            }
+        
+            if (!found) {
+                printf("Character '%c' not found in the string.\n", target);
+            }
+        
+            return 0;
+        }
+                
+</code></pre>
+<img src="../SEARCHING ALGORITHMS/output/Q4.jpg">
+</body>
+</html>

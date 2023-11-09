@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h3>ENTER THE STRING FROM USER AND COPY IT INTO ANOTHER STRING VARIABLE</h3>
+<pre><code>
+    #include <stdio.h>
+        #include <string.h>
+        
+        int main() {
+            char originalString[1000];
+            char copiedString[1000];
+        
+            printf("Enter a string: ");
+            fgets(originalString, sizeof(originalString), stdin);
+        
+            // Copying the string using strcpy
+            strcpy(copiedString, originalString);
+        
+            printf("Original String: %s", originalString);
+            printf("Copied String: %s", copiedString);
+        
+            return 0;
+        }
+                
+</code></pre>
+<img src="../STRINGS/output/Q9.jpg">
+</body>
+</html>

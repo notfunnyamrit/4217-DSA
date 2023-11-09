@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h3>ENTER TWO STRINGS FROM USER AND COMPARE THOSE STRINGS THAT THEY ARE EQUAL OR NOT</h3>
+<pre><code>
+    #include <stdio.h>
+        #include <string.h>
+        
+        int main() {
+            char firstString[1000];
+            char secondString[1000];
+        
+            printf("Enter the first string: ");
+            fgets(firstString, sizeof(firstString), stdin);
+        
+            printf("Enter the second string: ");
+            fgets(secondString, sizeof(secondString), stdin);
+        
+            // Comparing the strings using strcmp
+            if (strcmp(firstString, secondString) == 0) {
+                printf("The strings are equal.\n");
+            } else {
+                printf("The strings are not equal.\n");
+            }
+        
+            return 0;
+        }
+        
+        
+</code></pre>
+<img src="../STRINGS/output/Q7.jpg">
+</body>
+</html>

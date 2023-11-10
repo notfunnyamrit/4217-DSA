@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+    <html>
+    <body></body>
+    <h3>  5. IMPLEMENT THE OPERATIONS OF SINGLE LINKED LIST STORING STRING VALUES (INSERT AT BEGIN,INSERT AT POS,INSERT AT END,DELETE AT BEGIN,DELETE AT END, DELETE AT POS, ISEMPTY, ISFULL, DISPLAY, SEARCH) </h3>
+    <pre><code>
+    
+        #include <stdio.h>
+            #include <stdlib.h>
+            #include <string.h>
+            
+            // Define a structure for a node in the linked list
+            struct Node {
+                char data[100]; // Assuming each node can store a string of up to 100 characters
+                struct Node* next;
+            };
+            
+            // Function to insert a node at the beginning of the linked list
+            void insertAtBegin(struct Node** head, char value[]) {
+                struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+                strcpy(newNode->data, value);
+                newNode->next = *head;
+                *head = newNode;
+            }
+            
+            // Function to insert a node at a specific position in the linked list
+            void insertAtPos(struct Node** head, char value[], int pos) {
+                struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+                strcpy(newNode->data, value);
+            
+                if (pos == 0) {
+                    newNode->next = *head;
+                    *head = newNode;
+                    return;
+                }
+            
+                struct Node* temp = *head;
+                for (int i = 0; i < pos - 1 && temp != NULL; i++) {
+                    temp = temp->next;
+                }
+            
+                if (temp == NULL) {
+                    printf("Position out of range\n");
+                    free(newNode);
+                    return;
+                }
+            
+                newNode->next = temp->next;
+                temp->next = newNode;
+            }
+            
+            // Function to insert a node at the end of the linked list
+            void insertAtEnd(struct Node** head, char value[]) {
+                struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+                strcpy(newNode->data, value);
+                newNode->next = NULL;
+            
+                if (*head == NULL) {
+                    *head = newNode;
+                    return;
+                }
+            
+                struct Node* temp = *head;
+                while (temp->next != NULL) {
+                    temp = temp->next;
+                }
+            
+                temp->next = newNode;
+            }
+            
+            // Function to delete the first node in the linked list
+            void deleteAtBegin(struct Node** head) {
+                if (*head == NULL) {
+                    printf("List is empty, cannot delete\n");
+                    return;
+                }
+            
+                struct Node* temp = *head;
+                *head = (*head)->next;
+                free(temp);
+            }
+            
+            // Function to delete the last node in the linked list
+            void deleteAtEnd(struct Node** head) {
+                if (*head == NULL) {
+                    printf("List is empty, cannot delete\n");
+                    return;
+                }
+            
+                if ((*head)->next == NULL) {
+                    free(*head);
+                    *head = NULL;
+                    return;
+                }
+            
+                struct Node* temp = *head;
+                while (temp->next->next != NULL) {
+                    temp = temp->next;
+                }
+            
+                free(temp->next);
+                temp->next = NULL;
+            }
+            
+            // Function to delete a node at a specific position in the linked list
+            void deleteAtPos(struct Node** head, int pos) {
+                if (*head == NULL) {
+                    printf("List is empty, cannot delete\n");
+                    return;
+                }
+            
+                if (pos == 0) {
+                    struct Node* temp = *head;
+                    *head = (*head)->next;
+                    free(temp);
+                    return;
+                }
+            
+                struct Node* temp = *head;
+                struct Node* prev = NULL;
+                for (int i = 0; i < pos && temp != NULL; i++) {
+                    prev = temp;
+                    temp = temp->next;
+                }
+            
+                if (temp == NULL) {
+                    printf("Position out of range\n");
+                    return;
+                }
+            
+                prev->next = temp->next;
+                free(temp);
+            }
+            
+            // Function to check if the linked list is empty
+            int isEmpty(struct Node* head) {
+                return (head == NULL);
+            }
+            
+            // Function to display the linked list
+            void display(struct Node* head) {
+                struct Node* temp = head;
+                while (temp != NULL) {
+                    printf("%s -> ", temp->data);
+                    temp = temp->next;
+                }
+                printf("NULL\n");
+            }
+            
+            // Function to search for a value in the linked list
+            int search(struct Node* head, char value[]) {
+                struct Node* temp = head;
+                int pos = 0;
+                while (temp != NULL) {
+                    if (strcmp(temp->data, value) == 0) {
+                        return pos;
+                    }
+                    temp = temp->next;
+                    pos++;
+                }
+                return -1; // Return -1 if value is not found
+            }
+            
+            // Main function for testing the linked list operations
+            int main() {
+                struct Node* head = NULL;
+            
+                insertAtEnd(&head, "apple");
+                insertAtEnd(&head, "banana");
+                insertAtEnd(&head, "cherry");
+                display(head);
+            
+                insertAtBegin(&head, "grape");
+                display(head);
+            
+                insertAtPos(&head, "kiwi", 2);
+                display(head);
+            
+                deleteAtEnd(&head);
+                display(head);
+            
+                deleteAtBegin(&head);
+                display(head);
+            
+                deleteAtPos(&head, 1);
+                display(head);
+            
+                int pos = search(head, "banana");
+                if (pos != -1) {
+                    printf("Found at position %d\n", pos);
+                } else {
+                    printf("Not found\n");
+                }
+            
+                return 0;
+            }
+            
+            
+        
+
+</code></pre>
+<img src="../LINKED LIST/OUTPUT/q5.jpg">
+</body>
+</html>

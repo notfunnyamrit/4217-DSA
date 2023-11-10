@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+    <html>
+    <body></body>
+    <h3>3. IMPLEMENT THE OPERATIONS OF DOUBLY LINKED LIST STORING INTEGER VALUES (INSERT AT BEGIN,INSERT AT POS,INSERT AT END,DELETE AT BEGIN,DELETE AT END, DELETE AT POS, ISEMPTY, ISFULL, DISPLAY, SEARCH) </h3>
+    <pre><code>
+    
+        #include <stdio.h>
+            #include <stdlib.h>
+            
+            // Define the structure for a node in the doubly linked list
+            typedef struct Node {
+                int data;
+                struct Node* next;
+                struct Node* prev;
+            } Node;
+            
+            // Define the structure for the doubly linked list itself
+            typedef struct DoublyLinkedList {
+                Node* head;
+                Node* tail;
+            } DoublyLinkedList;
+            
+            // Function to create a new node
+            Node* createNode(int data) {
+                Node* newNode = (Node*)malloc(sizeof(Node));
+                newNode->data = data;
+                newNode->next = NULL;
+                newNode->prev = NULL;
+                return newNode;
+            }
+            
+            // Function to initialize a doubly linked list
+            void initializeList(DoublyLinkedList* list) {
+                list->head = NULL;
+                list->tail = NULL;
+            }
+            
+            // Function to check if the list is empty
+            int isEmpty(DoublyLinkedList* list) {
+                return list->head == NULL;
+            }
+            
+            // Function to insert a node at the beginning of the list
+            void insertAtBegin(DoublyLinkedList* list, int data) {
+                Node* newNode = createNode(data);
+                if (isEmpty(list)) {
+                    list->head = newNode;
+                    list->tail = newNode;
+                } else {
+                    newNode->next = list->head;
+                    list->head->prev = newNode;
+                    list->head = newNode;
+                }
+            }
+            
+            // Function to insert a node at a specified position
+            void insertAtPos(DoublyLinkedList* list, int data, int pos) {
+                if (pos < 1) {
+                    printf("Invalid position\n");
+                    return;
+                }
+            
+                Node* newNode = createNode(data);
+            
+                if (pos == 1) {
+                    insertAtBegin(list, data);
+                    return;
+                }
+            
+                Node* temp = list->head;
+                int i;
+                for (i = 1; i < pos - 1 && temp != NULL; i++) {
+                    temp = temp->next;
+                }
+            
+                if (temp == NULL) {
+                    printf("Invalid position\n");
+                    free(newNode);
+                    return;
+                }
+            
+                newNode->next = temp->next;
+                newNode->prev = temp;
+                if (temp->next != NULL) {
+                    temp->next->prev = newNode;
+                }
+                temp->next = newNode;
+            
+                if (temp == list->tail) {
+                    list->tail = newNode;
+                }
+            }
+            
+            // Function to insert a node at the end of the list
+            void insertAtEnd(DoublyLinkedList* list, int data) {
+                Node* newNode = createNode(data);
+                if (isEmpty(list)) {
+                    list->head = newNode;
+                    list->tail = newNode;
+                } else {
+                    newNode->prev = list->tail;
+                    list->tail->next = newNode;
+                    list->tail = newNode;
+                }
+            }
+            
+            // Function to delete a node from the beginning of the list
+            void deleteAtBegin(DoublyLinkedList* list) {
+                if (isEmpty(list)) {
+                    printf("List is empty\n");
+                    return;
+                }
+            
+                Node* temp = list->head;
+            
+                if (list->head == list->tail) {
+                    list->head = NULL;
+                    list->tail = NULL;
+                } else {
+                    list->head = list->head->next;
+                    list->head->prev = NULL;
+                }
+            
+                free(temp);
+            }
+            
+            // Function to delete a node from the end of the list
+            void deleteAtEnd(DoublyLinkedList* list) {
+                if (isEmpty(list)) {
+                    printf("List is empty\n");
+                    return;
+                }
+            
+                Node* temp = list->tail;
+            
+                if (list->head == list->tail) {
+                    list->head = NULL;
+                    list->tail = NULL;
+                } else {
+                    list->tail = list->tail->prev;
+                    list->tail->next = NULL;
+                }
+            
+                free(temp);
+            }
+            
+            // Function to delete a node from a specified position
+            void deleteAtPos(DoublyLinkedList* list, int pos) {
+                if (isEmpty(list)) {
+                    printf("List is empty\n");
+                    return;
+                }
+            
+                if (pos < 1) {
+                    printf("Invalid position\n");
+                    return;
+                }
+            
+                Node* temp = list->head;
+            
+                if (pos == 1) {
+                    deleteAtBegin(list);
+                    return;
+                }
+            
+                int i;
+                for (i = 1; i < pos && temp != NULL; i++) {
+                    temp = temp->next;
+                }
+            
+                if (temp == NULL) {
+                    printf("Invalid position\n");
+                    return;
+                }
+            
+                temp->prev->next = temp->next;
+                if (temp->next != NULL) {
+                    temp->next->prev = temp->prev;
+                }
+            
+                if (temp == list->tail) {
+                    list->tail = temp->prev;
+                }
+            
+                free(temp);
+            }
+            
+            // Function to display the elements of the list
+            void display(DoublyLinkedList* list) {
+                Node* temp = list->head;
+                while (temp != NULL) {
+                    printf("%d ", temp->data);
+                    temp = temp->next;
+                }
+                printf("\n");
+            }
+            
+            // Function to search for an element in the list
+            int search(DoublyLinkedList* list, int data) {
+                Node* temp = list->head;
+                int pos = 1;
+                while (temp != NULL) {
+                    if (temp->data == data) {
+                        return pos;
+                    }
+                    temp = temp->next;
+                    pos++;
+                }
+                return -1;
+            }
+            
+            int main() {
+                DoublyLinkedList list;
+                initializeList(&list);
+            
+                insertAtBegin(&list, 10);
+                insertAtEnd(&list, 20);
+                insertAtPos(&list, 15, 2);
+            
+                printf("List: ");
+                display(&list);
+            
+                deleteAtPos(&list, 2);
+            
+                printf("List after deleting element at position 2: ");
+                display(&list);
+            
+                int searchResult = search(&list, 20);
+                if (searchResult != -1) {
+                    printf("Element 20 found at position %d\n", searchResult);
+                } else {
+                    printf("Element not found\n");
+                }
+            
+                return 0;
+            }
+            
+            
+        
+
+</code></pre>
+<img src="/questions/LINKED LIST/OUTPUT/q3.jpg">
+</body>
+</html>

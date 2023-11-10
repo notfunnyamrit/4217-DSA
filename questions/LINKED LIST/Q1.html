@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+    <html>
+    <body></body>
+    <h3>1. IMPLEMENT THE OPERATIONS OF SINGLE LINKED LIST STORING INTEGER VALUES (INSERT AT BEGIN,INSERT AT POS,INSERT AT END,DELETE AT BEGIN,DELETE AT END, DELETE AT POS, ISEMPTY, ISFULL, DISPLAY, SEARCH) </h3>
+    <pre><code>
+    
+        #include <stdio.h>
+            #include <stdlib.h>
+            
+            struct Node {
+                int data;
+                struct Node* next;
+            };
+            
+            typedef struct Node Node;
+            
+            Node* createNode(int data) {
+                Node* newNode = (Node*)malloc(sizeof(Node));
+                newNode->data = data;
+                newNode->next = NULL;
+                return newNode;
+            }
+            
+            void insertAtBeginning(Node** head, int data) {
+                Node* newNode = createNode(data);
+                newNode->next = *head;
+                *head = newNode;
+            }
+            
+            void insertAtPosition(Node* head, int position, int data) {
+                if (position < 0) {
+                    printf("Position must be non-negative\n");
+                    return;
+                }
+            
+                Node* newNode = createNode(data);
+            
+                if (position == 0) {
+                    newNode->next = head->next;
+                    head->next = newNode;
+                    return;
+                }
+            
+                Node* current = head;
+                for (int i = 0; i < position - 1; i++) {
+                    if (current == NULL) {
+                        printf("Position out of range\n");
+                        return;
+                    }
+                    current = current->next;
+                }
+            
+                newNode->next = current->next;
+                current->next = newNode;
+            }
+            
+            void insertAtEnd(Node* head, int data) {
+                Node* newNode = createNode(data);
+            
+                Node* current = head;
+                while (current->next != NULL) {
+                    current = current->next;
+                }
+            
+                current->next = newNode;
+            }
+            
+            void deleteAtBeginning(Node** head) {
+                if (*head == NULL) {
+                    printf("List is empty\n");
+                    return;
+                }
+            
+                Node* temp = *head;
+                *head = (*head)->next;
+                free(temp);
+            }
+            
+            void deleteAtPosition(Node* head, int position) {
+                if (head == NULL) {
+                    printf("List is empty\n");
+                    return;
+                }
+            
+                if (position < 0) {
+                    printf("Position must be non-negative\n");
+                    return;
+                }
+            
+                if (position == 0) {
+                    Node* temp = head->next;
+                    free(head);
+                    head = temp;
+                    return;
+                }
+            
+                Node* current = head;
+                for (int i = 0; i < position - 1; i++) {
+                    if (current == NULL || current->next == NULL) {
+                        printf("Position out of range\n");
+                        return;
+                    }
+                    current = current->next;
+                }
+            
+                Node* temp = current->next;
+                current->next = current->next->next;
+                free(temp);
+            }
+            
+            void deleteAtEnd(Node* head) {
+                if (head == NULL) {
+                    printf("List is empty\n");
+                    return;
+                }
+            
+                if (head->next == NULL) {
+                    free(head);
+                    head = NULL;
+                    return;
+                }
+            
+                Node* current = head;
+                while (current->next->next != NULL) {
+                    current = current->next;
+                }
+            
+                free(current->next);
+                current->next = NULL;
+            }
+            
+            int isEmpty(Node* head) {
+                return (head == NULL);
+            }
+            
+            void display(Node* head) {
+                Node* current = head;
+                while (current != NULL) {
+                    printf("%d -> ", current->data);
+                    current = current->next;
+                }
+                printf("NULL\n");
+            }
+            
+            int search(Node* head, int value) {
+                Node* current = head;
+                int position = 0;
+                while (current != NULL) {
+                    if (current->data == value) {
+                        return position;
+                    }
+                    current = current->next;
+                    position++;
+                }
+                return -1;
+            }
+            
+            int main() {
+                Node* linkedList = NULL;
+            
+                insertAtBeginning(&linkedList, 5);
+                insertAtBeginning(&linkedList, 10);
+                insertAtEnd(linkedList, 15);
+                insertAtPosition(linkedList, 2, 7);
+            
+                display(linkedList); // Output: 10 -> 5 -> 7 -> 15 -> NULL
+            
+                deleteAtBeginning(&linkedList);
+                deleteAtEnd(linkedList);
+                deleteAtPosition(linkedList, 1);
+            
+                display(linkedList); // Output: 5 -> NULL
+            
+                printf("%s\n", isEmpty(linkedList) ? "List is empty" : "List is not empty"); // Output: List is not empty
+            
+                int searchResult1 = search(linkedList, 5);
+                int searchResult2 = search(linkedList, 10);
+            
+                printf("Search result for 5: %d\n", searchResult1); // Output: Search result for 5: 0
+                printf("Search result for 10: %d\n", searchResult2); // Output: Search result for 10: -1
+            
+                return 0;
+            }
+            
+            
+        
+
+</code></pre>
+<img src="/questions/LINKED LIST/OUTPUT/q1.jpg ">
+</body>
+</html>
